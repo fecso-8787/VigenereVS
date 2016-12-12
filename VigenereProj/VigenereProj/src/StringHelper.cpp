@@ -25,7 +25,7 @@ String::String(const char * input)
 {
 	if (input)
 	{
-		m_length=strlen(input)+1;
+		m_length=static_cast<unsigned int>(strlen(input))+1;
 		m_charArray = new char[m_length];
 		strcpy_s(m_charArray, (m_length)*sizeof(char), input);
 	}
@@ -48,7 +48,7 @@ String::~String()
 const unsigned int String::getLenght() const
 {
 	if(m_charArray)
-	return strlen(m_charArray);
+	return static_cast<unsigned int>(strlen(m_charArray));
 	return -1;
 }
 
@@ -164,5 +164,5 @@ void String::removeAll(const char c)
 	}
 	m_charArray=new char[counter+1];
 	strcpy_s(m_charArray, (counter + 1) * sizeof(char), temp);
-	m_length = strlen(m_charArray)+1;
+	m_length = static_cast<unsigned int>(strlen(m_charArray))+1;
 }

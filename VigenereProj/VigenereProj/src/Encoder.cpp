@@ -12,13 +12,40 @@ Encoder::~Encoder()
 	delete[] m_table;
 }
 
-void Encoder::setKey(String key)
+bool Encoder::setKey(String key)
 {
-	if(key.getLenght()==0)
+	bool success = true;
+	if (key.getLenght() > 5 || key.getLenght()==0)
 	{
-		puts("Bad keystring\n");
+		puts("A kulcsnak maximum 5 és minimum 1 karakterbõl kell állnia");
+		success = false;
 	}
 	m_key = key.toUpper();
+	if (isKeyContainsBadChar())
+	{
+		puts("Hibásan megadott kulcs.Csak az ékezetmentes betûk az elfogadottak.");
+		success = false;
+	}
+
+	
+	return success;
+}
+
+const String& Encoder::getKey()const
+{
+	return m_key;
+}
+
+bool Encoder::isKeyContainsBadChar()
+{
+	for(unsigned int i=0;i<m_key.getLenght();i++)
+	{
+		if(!String::isAcceptedCharacter(m_key[i]))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 String Encoder::getEncodedString(const String& toEncode)

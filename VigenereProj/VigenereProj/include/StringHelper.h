@@ -16,9 +16,10 @@ public:
 	char& operator[] (int x);
 	String& operator=(const String& str);
 	void removeAll(const char c);
+	static bool isAcceptedCharacter(const char input);
 private:
 	char* m_charArray;
 	unsigned int m_length;
-	static bool isAcceptedCharacter(const char input);
+	
 
 };
